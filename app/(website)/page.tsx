@@ -1,6 +1,5 @@
 import React from 'react'
-import TopSocialMediaHeader from '../components/TopSocialMediaHeader'
-import HeaderNav from '../components/HeaderNav'
+
 import TrendingPerson from '../components/TrendingPerson'
 import TrendingNews from '../components/TrendingNews'
 import HeroTopNews from '../components/HeroTopNews'
