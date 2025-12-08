@@ -1,0 +1,392 @@
+Perfect — now you want a **full homepage + website layout** where:
+
+✔ **70% = Normal news categories** (राजनीति, लोकल, भारत, शिक्षा, मनोरंजन, टेक, खेल, वायरल…)
+✔ **30% = Biography-focused content** (top leaders, trending netas, biography highlights)
+
+That means the home page should look like a **standard news portal**, but with a **strong biography ecosystem integrated smoothly**.
+
+Below is your **final, perfect, premium layout plan** for both **Laptop + Mobile**, optimized for:
+
+* Engagement
+* AdSense earning
+* SEO ranking
+* Clean structure
+* Modern UX
+* Fast expansion
+
+---
+
+# ⭐ **FINAL HOMEPAGE LAYOUT (70% News + 30% Biographies)**
+
+### For **Laptop** and **Mobile** (FULL STRUCTURE)
+
+---
+
+# 🟥 **TOP NAVIGATION (Laptop + Mobile)**
+
+## 🖥 Laptop
+
+Two rows:
+
+### **Row 1 (Utility bar):**
+
+* Logo
+* City selector
+* Weather
+* Date
+* Search bar (wide)
+* Notifications
+* Dark mode
+* Login
+
+### **Row 2 (Category bar):**
+
+Horizontal pills:
+
+```
+ताज़ा खबरें | देश | राज्य | लोकल | राजनीति | चुनाव | शिक्षा | नौकरियां | टेक | खेल | मनोरंजन | वायरल | जीवनियाँ
+```
+
+## 📱 Mobile
+
+Row 1:
+
+* Hamburger
+* Logo
+* Search icon
+
+Row 2:
+
+* Category scroll (YouTube style)
+
+---
+
+# 🟥 SECTION 1 — Hero Section (Top News)
+
+**(70% News area)**
+
+## 🖥 Laptop
+
+**3-column premium layout**
+
+### Left (50%):
+
+Big main article
+
+* Large image
+* Bold title
+* Short description
+* Category tag
+* “पूरा पढ़ें →”
+
+### Middle (25%):
+
+Two medium news cards
+
+* Image
+* Title
+
+### Right (25%):
+
+“आज की 10 बड़ी ख़बरें” list
+
+* Only headlines
+* Small icon
+* Auto-update
+
+## 📱 Mobile
+
+* Full-width hero image
+* Title → Description
+* Swipe slider for top 5 news
+
+---
+
+# 🟥 SECTION 2 — Quick Short News (Swipe + Cards)
+
+**(News: 100%)**
+
+## 🖥 Laptop
+
+Horizontal slider with 10–12 cards
+Each card:
+
+* Square image
+* 1-line headline
+* “30-second read” badge
+
+## 📱 Mobile
+
+Instagram-style horizontal swipe cards
+Auto-scroll
+Tap to expand
+
+---
+
+# 🟥 SECTION 3 — Category Blocks (Major News Section)
+
+**(News: 100%)**
+
+## 🖥 Laptop
+
+### 4 major categories on homepage:
+
+* देश
+* राज्य
+* राजनीति
+* शिक्षा
+
+Each category uses same layout:
+
+* 1 Big card (featured)
+* 4 medium cards
+* 5 small text headlines
+
+## 📱 Mobile
+
+Each category becomes a **section carousel**:
+
+* Big card
+* Swipeable 4 medium
+* 5 small headlines stacked
+
+---
+
+# 🟥 SECTION 4 — Local News by State/City (High SEO)
+
+**(News: 100%)**
+
+## 🖥 Laptop
+
+Full-width
+Layout:
+
+* State name dropdown
+* 1 big story
+* 6 medium cards
+* 8 small headlines
+
+## 📱 Mobile
+
+* Dropdown for state
+* Vertical list of news
+* Simple + clean
+
+---
+
+# 🟩 🟩 🟩 SECTION 5 — BIOGRAPHY SUPER SECTION (Your 30%)
+
+This is your **unique identity**.
+
+Comes after main news but before footer.
+
+---
+
+# 🟦 **BIOGRAPHY SECTION – Part A**
+
+### ⭐ **Trending Leaders Slider**
+
+## 🖥 Laptop
+
+Horizontal cards:
+
+* Photo (circle)
+* Name
+* Party + State
+* “जीवनी पढ़ें →”
+
+Show 12–20 leaders.
+
+## 📱 Mobile
+
+Swipe slider with 1.5 cards visible.
+
+---
+
+# 🟦 **BIOGRAPHY SECTION – Part B**
+
+### ⭐ **Featured Biographies (3–4 Highlighted)**
+
+Show big cards for:
+
+* Modi
+* Amit Shah
+* Yogi
+* Abhay Singh
+* Dhananjay Singh
+
+Each card:
+
+* Rectangle image
+* Title: “___ की पूरी जीवनी”
+* 4-line summary
+* CTA
+
+🌟 **VERY IMPORTANT FOR SEO**
+
+---
+
+# 🟦 **BIOGRAPHY SECTION – Part C**
+
+### ⭐ **Biography Index by State**
+
+## 🖥 Laptop
+
+Grid of 3 columns:
+
+Example:
+**उत्तर प्रदेश के नेता**
+
+* Abhay Singh
+* Dhananjay Singh
+* Akhilesh
+* Yogi
+* etc.
+
+**बिहार के नेता**
+**दिल्ली के नेता**
+**राजस्थान के नेता**
+
+## 📱 Mobile
+
+* Collapsible accordion (state-wise)
+* Tap to expand → show 2-column grid
+
+---
+
+# 🟦 **BIOGRAPHY SECTION – Part D**
+
+### ⭐ **News Related to Those Leaders (Dynamic)**
+
+Example:
+
+**“अभय सिंह से जुड़ी ताज़ा खबरें”**
+3–5 cards
+
+**“धनंजय सिंह से जुड़ी ख़बरें”**
+3–5 cards
+
+**“मोदी से जुड़ा आज का बड़ा अपडेट”**
+3–5 cards
+
+This boosts **Google E-E-A-T + freshness score**.
+
+---
+
+# 🟥 SECTION 6 — Explainer Section (Mixed)
+
+**(News + Biography mix)**
+
+## 🖥 Laptop
+
+Grid of 4 explainers:
+
+* अजय मिश्र विवाद
+* मोदी का नया बिल
+* चुनाव आयोग नियम
+* NEET अपडेट
+
+## 📱 Mobile
+
+2-column grid
+
+---
+
+# 🟥 SECTION 7 — Video / Shorts
+
+**(News: 100%)**
+
+## 🖥 Laptop
+
+4-column video grid
+Hover → auto preview
+
+## 📱 Mobile
+
+Vertical reels feed
+
+---
+
+# 🟥 SECTION 8 — Footer
+
+(Keep Standard)
+
+---
+
+# 💎 **PERCENTAGE DISTRIBUTION (FINAL)**
+
+On homepage:
+
+### ✔ 70% = NEWS content
+
+* Top hero
+* Shorts
+* Category blocks
+* Local news
+* Video feed
+* Explainers
+
+### ✔ 30% = BIOGRAPHY ecosystem
+
+* Trending leaders slider
+* Featured biography cards
+* State-wise bio listing
+* Biography-related news
+
+This balance keeps your portal:
+✔ Mainstream
+✔ SEO-focused
+✔ Unique
+✔ High-ranking
+✔ High-earning
+
+---
+
+# 📱 **MOBILE FLOW SUMMARY (FINAL)**
+
+1. Sticky nav
+2. Search bar
+3. Top news slider
+4. Category blocks
+5. Local news
+6. Short news / 30-second slider
+7. BIOGRAPHY SLIDER
+8. Featured biography
+9. State-wise biography
+10. News related to leaders
+11. Videos
+12. Footer
+
+This mobile layout gives **highest retention + scroll depth**.
+
+---
+
+# 🖥 **LAPTOP SECTION ORDER SUMMARY**
+
+1. Top nav
+2. Hero section (Top news)
+3. Short news slider
+4. Category blocks
+5. Local news
+6. 📌 Biography Super Section (A–D)
+7. Explainers
+8. Video grid
+9. Footer
+
+---
+
+# 🔥 WANT ME TO CREATE A VISUAL MOCKUP (Figma Style Layout)?
+
+I can generate:
+
+✔ Full visual layout (section by section)
+✔ Spacing, typography, grid
+✔ UI styles
+✔ Component structure
+
+OR
+
+🔥 **I can generate full HTML/React/Next.js UI code** for the complete homepage.
+
+Tell me:
+👉 **Do you want the Homepage UI in React / Next.js code next?**

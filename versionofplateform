@@ -1,0 +1,325 @@
+# 🚀 7-Day Launch Plan for **Bharat Ki Baat** (Super Detailed)
+
+This is the complete task + subtask plan for building and launching your news portal in **7 days**, including:
+
+* Full technical work
+* Content work
+* Facebook posting strategy
+* What pages and posts must exist before launch
+* Step-by-step daily execution
+
+Use this document as your working checklist.
+
+---
+
+# ✅ **DAY 1 — Project Setup + UI Layout + Social Setup**
+
+## 🎯 Goal: Create foundation + design + start building social presence
+
+## 🔧 **Technical Tasks**
+
+### 1. Create Next.js Project
+
+* Install Next.js (App Router)
+* Setup folder structure:
+
+  * `/app`
+  * `/components`
+  * `/lib`
+  * `/api`
+  * `/styles`
+
+### 2. Create Base Pages (Empty but structured)
+
+* `app/page.tsx` → Home Page Layout
+* `app/news/page.tsx` → News Listing
+* `app/biography/page.tsx` → Biography Listing
+* `app/news/[slug]/page.tsx` → Single News Page
+* `app/biography/[slug]/page.tsx` → Single Biography Page
+
+### 3. Create Main UI Sections
+
+* Header (logo + menu)
+* Footer (links + copyright)
+* Home sections (empty containers):
+
+  * Trending
+  * Top Stories
+  * Latest News
+  * Biography Highlights
+  * Viral Section
+
+## 📝 **Content Tasks**
+
+### 1. Plan Content Categories
+
+* Local News
+* National News
+* Education
+* Election
+* Biography
+* Viral
+
+### 2. Write first 3 drafts
+
+* 1 biography
+* 2 news
+
+## 📱 **Facebook Tasks**
+
+### 1. Create Page
+
+* Upload profile + cover
+* Add description
+
+### 2. Post 2 Intro Posts
+
+* About platform
+* What content you will share
+
+---
+
+# ✅ **DAY 2 — Google Login + SEO + Post Structure**
+
+## 🎯 Goal: Authentication + SEO + post data model
+
+## 🔧 **Technical Tasks**
+
+### 1. Add Google Login (NextAuth)
+
+* Configure Google OAuth
+* Create user schema
+* Save user in MongoDB
+
+### 2. Build Post Schema (Backend Model)
+
+* Title
+* Slug
+* Category
+* Image
+* Content
+* Tags
+* Author
+* CreatedAt
+* UpdatedAt
+
+### 3. Setup SEO
+
+* Metadata API
+* OpenGraph tags
+* Robots.txt
+* Sitemap.xml structure
+
+## 📝 **Content Tasks**
+
+### Write 5 more drafts
+
+* 2 biographies
+* 3 news
+
+## 📱 **Facebook Tasks**
+
+* Post 2 trending updates (no links yet)
+
+---
+
+# ✅ **DAY 3 — Database + CRUD API + Content Pipeline**
+
+## 🎯 Goal: Backend ready + admin temporary panel
+
+## 🔧 **Technical Tasks**
+
+### 1. Connect MongoDB
+
+### 2. Create APIs
+
+* POST /api/posts → Create post
+* GET /api/posts → List posts
+* GET /api/posts/[slug] → Single post
+
+### 3. Admin Temporary UI (Simple)
+
+* Form to create a post
+* Form to upload image
+* Preview post
+
+## 📝 **Content Tasks**
+
+Write 5 more drafts:
+
+* 3 news
+* 2 biographies
+
+## 📱 **Facebook Tasks**
+
+Post:
+
+* 1 biography mini-post
+* 1 trending card
+
+---
+
+# ✅ **DAY 4 — Homepage Final + Internal Linking**
+
+## 🎯 Goal: Make homepage functional + SEO friendly
+
+## 🔧 **Technical Tasks**
+
+### 1. Fill Homepage Sections
+
+* Trending (API connected)
+* Latest news
+* Biography cards
+* Viral section
+
+### 2. Add Internal Links
+
+* Related posts
+* Category navigation
+
+### 3. Add Social Share Buttons
+
+* WhatsApp
+* Facebook
+* Twitter
+
+## 📝 **Content Tasks**
+
+Publish 6 articles:
+
+* 3 biographies
+* 3 news
+
+## 📱 **Facebook Tasks**
+
+Post 3 short updates:
+
+* Morning trending
+* Afternoon local news
+* Night biography
+
+---
+
+# ✅ **DAY 5 — Performance + Publish More Posts**
+
+## 🎯 Goal: Get site fast + publish enough content
+
+## 🔧 **Technical Tasks**
+
+### 1. Speed Optimization
+
+* Image optimization
+* Lazy loading
+* Reduce JS bundles
+
+### 2. Add Analytics
+
+* GA4
+* Meta Pixel (optional)
+
+## 📝 **Content Tasks**
+
+Publish 4 more articles:
+
+* 2 news
+* 1 trending
+* 1 biography
+
+Total now = **10 articles**
+
+## 📱 **Facebook Tasks**
+
+* Share your first article link
+* Share 1 biography image card
+
+---
+
+# ✅ **DAY 6 — Polish Everything + Pre-Launch Hype**
+
+## 🎯 Goal: Make the platform beautiful + hype audience
+
+## 🔧 **Technical Tasks**
+
+* Fix all UI bugs
+* Make responsive sections
+* Add favicon
+* Add footer links
+* Clean design
+
+## 📝 **Content Tasks**
+
+Publish 3–5 posts
+
+* 2 news
+* 2 biographies
+* 1 viral
+
+Total now = **15 posts** (perfect for launch)
+
+## 📱 **Facebook Tasks**
+
+3 hype posts:
+
+* Big announcement tomorrow
+* Sneak peek of platform
+* What categories we will cover
+
+---
+
+# ✅ **DAY 7 — LAUNCH DAY 🚀🔥**
+
+## 🎯 Goal: Go live + share everywhere
+
+## 🔧 **Technical Tasks**
+
+* Deploy on Vercel
+* Submit sitemap to Google Search Console
+* Test share previews
+* Test all pages
+
+## 📝 **Content Tasks (Launch Day)**
+
+Website must have:
+
+* 15 articles
+
+  * 8 news
+  * 5 biographies
+  * 2 viral
+
+## 📱 **Facebook Tasks**
+
+### 🎉 MAIN LAUNCH POST
+
+* Big headline
+* Platform link
+* Features
+* 3 article links in comments
+* Viral tags
+
+### Extra Posts
+
+* Morning → Launch
+* Afternoon → Biography link
+* Night → Breaking news link
+
+---
+
+# 🎯 After Launch Daily Plan
+
+* 10–12 posts daily on website
+* 4 Facebook posts daily
+* 1–2 article links
+* 2 image/trending posts
+
+---
+
+# ⭐ End Result After 7 Days
+
+You will have:
+✔ Fully working SEO news portal
+✔ 15 high-quality articles
+✔ Google Indexing setup
+✔ Facebook audience warmed up
+✔ Professional look from day one
+✔ Start getting traffic + earnings
