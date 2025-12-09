@@ -112,7 +112,7 @@ export default function Home() {
 
           {/* WhatsApp */}
           <Link
-            href="https://wa.me/91XXXXXXXXXX"
+            href="https://whatsapp.com/channel/0029VbB5mdfBKfi8TlKgVU19"
             target="_blank"
             className="inline-block px-6 py-3 bg-green-600 hover:bg-green-500 rounded-full font-semibold shadow-lg"
           >
@@ -121,7 +121,7 @@ export default function Home() {
 
           {/* Facebook */}
           <Link
-            href="https://facebook.com"
+            href="https://www.facebook.com/profile.php?id=61584098969969"
             target="_blank"
             className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-full font-semibold shadow-lg"
           >
