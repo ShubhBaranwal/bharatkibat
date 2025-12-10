@@ -1,7 +1,14 @@
 // app/(user)/layout.tsx
 import "../globals.css";
 import type { Metadata } from "next";
-
+import {
+  ClerkProvider,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs'
 export const metadata: Metadata = {
   title: {
     default: "Bharat Ki Baat – Latest News, Breaking News, Trending",
@@ -38,6 +45,9 @@ export default function UserLayout({
   children: React.ReactNode;
 }) {
   return (
+    <ClerkProvider>
+
+   
     <html lang="en">
       <body>
         {/* HEADER */}
@@ -51,6 +61,17 @@ export default function UserLayout({
               <a href="/contact" className="hover:text-blue-600">Contact</a>
             </nav>
           </div>
+          <SignedOut>
+              <SignInButton />
+              <SignUpButton>
+                <button className="bg-[#6c47ff] text-ceramic-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
         </header>
 
         <main className="max-w-6xl mx-auto p-4">{children}</main>
@@ -65,5 +86,6 @@ export default function UserLayout({
         </footer>
       </body>
     </html>
+     </ClerkProvider>
   );
 }
