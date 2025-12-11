@@ -1,59 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useCallback } from "react";
 import Link from "next/link";
 import logo from "@/public/final logo fom website.png";
 import Image from "next/image";
-
-interface TimeLeft {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
-}
+import CountdownTimer from "@/components/CountdownTimer";
 
 export default function Home() {
-  const launchDate = new Date();
-  launchDate.setDate(launchDate.getDate() + 5);
+  // Target Date: December 15, 2025
+  const targetDate = new Date("2025-12-16T00:00:00");
+  const [daysRemaining, setDaysRemaining] = useState<number>(0);
 
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const now = Date.now();
-      const distance = launchDate.getTime() - now;
-
-      const updatedTime: TimeLeft = {
-        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-        hours: Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        ),
-        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((distance % (1000 * 60)) / 1000),
-      };
-
-      setTimeLeft(updatedTime);
-    }, 1000);
-
-    return () => clearInterval(timer);
+  const handleDaysChange = useCallback((days: number) => {
+    setDaysRemaining(days);
   }, []);
-
-  const timerUnits: Array<keyof TimeLeft> = [
-    "days",
-    "hours",
-    "minutes",
-    "seconds",
-  ];
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-linear-to-br from-black via-gray-900 to-gray-800 text-white px-6">
       <div className="text-center max-w-2xl w-full animate-fadeIn">
-        
+
         {/* LOGO */}
         <Image
           src={logo}
@@ -74,26 +39,12 @@ export default function Home() {
         </p>
 
         {/* Countdown Timer */}
-        <div className="mt-10 flex justify-center gap-4 md:gap-6 text-center">
-          {timerUnits.map((unit) => (
-            <div
-              key={unit}
-              className="bg-gray-800 rounded-xl px-4 py-3 w-20 md:w-24 shadow-xl"
-            >
-              <p className="text-3xl md:text-4xl font-bold text-yellow-400">
-                {timeLeft[unit]}
-              </p>
-              <p className="text-xs md:text-sm uppercase tracking-wide text-gray-400">
-                {unit}
-              </p>
-            </div>
-          ))}
-        </div>
+        <CountdownTimer targetDate={targetDate} onDaysChange={handleDaysChange} />
 
         {/* Hindi Info Section */}
         <div className="mt-10 text-gray-300 leading-relaxed">
           <p className="text-xl font-semibold text-yellow-300">
-            हम 5 दिनों में LIVE हो रहे हैं!
+            हम {daysRemaining} दिनों में LIVE हो रहे हैं!
           </p>
 
           <p className="mt-3">
