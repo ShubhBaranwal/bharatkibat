@@ -27,7 +27,7 @@ export default function WebsiteLayout({ children }: { children: React.ReactNode 
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
                 <Navbar />
                 <Header />
-                <BiographyHeader />
+                {/* <BiographyHeader /> */}
                 {children}
                 <Analytics />
 
