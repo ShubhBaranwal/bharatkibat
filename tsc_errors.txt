@@ -1,0 +1,5 @@
+﻿app/api/categories/[id]/route.ts(69,69): error TS2339: Property 'errors' does not exist on type 'ZodError<unknown>'.
+app/api/categories/route.ts(57,69): error TS2339: Property 'errors' does not exist on type 'ZodError<unknown>'.
+components/admin/CategoryForm.tsx(6,29): error TS2307: Cannot find module '@hookform/resolvers/zod' or its corresponding type declarations.
+models/Content.ts(2,29): error TS2306: File 'E:/news_website/models/Block.ts' is not a module.
+models/Epicode.ts(2,29): error TS2306: File 'E:/news_website/models/Block.ts' is not a module.

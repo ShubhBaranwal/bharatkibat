@@ -1,0 +1,60 @@
+﻿
+> news_website@0.1.0 lint
+> eslint
+
+
+E:\news_website\app\(admin)\admin\category\[id]\page.tsx
+  10:46  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  25:27  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\news_website\app\(admin)\admin\category\page.tsx
+  34:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\news_website\app\(admin)\login\page.tsx
+  55:18  warning  'err' is defined but never used  @typescript-eslint/no-unused-vars
+
+E:\news_website\app\(user)\page.tsx
+  44:8  warning  React Hook useEffect has a missing dependency: 'launchDate'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\news_website\app\api\auth\register\route.ts
+  52:21  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\news_website\app\api\categories\[id]\route.ts
+   34:21  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+   47:13  error  'updateData' is never reassigned. Use 'const' instead  prefer-const
+   47:25  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+   80:21  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  100:21  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+
+E:\news_website\app\api\categories\route.ts
+  23:27  warning  'req' is defined but never used                  @typescript-eslint/no-unused-vars
+  28:21  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+  42:13  error    'slug' is never reassigned. Use 'const' instead  prefer-const
+  58:21  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+
+E:\news_website\components\admin\CategoryForm.tsx
+   31:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   47:50  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  100:58  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  107:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\news_website\lib\auth.ts
+  19:14  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+E:\news_website\lib\db.ts
+   9:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  12:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\news_website\models\User.ts
+  1:8  warning  'mongoose' is defined but never used  @typescript-eslint/no-unused-vars
+
+E:\news_website\proxy.ts
+  13:24  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  21:14  warning  'err' is defined but never used           @typescript-eslint/no-unused-vars
+
+E:\news_website\scripts\test-categories.js
+  59:15  warning  'updateData' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Γ£û 26 problems (19 errors, 7 warnings)
+  2 errors and 0 warnings potentially fixable with the `--fix` option.
+
