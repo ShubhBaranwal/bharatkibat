@@ -32,7 +32,7 @@ const ContentSchema = new Schema(
         /** CONTENT TYPE */
         type: {
             type: String,
-            enum: ["news", "biography", "story", "episode"],
+            enum: ["news", "biography", "story", "episode", "5-min-news"],
             default: "news",
             index: true,
         },

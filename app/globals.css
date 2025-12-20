@@ -16,3 +16,12 @@
   --shade-black: #333333;
   --dark-blue: #0b1f34;
 }
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
