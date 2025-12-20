@@ -28,11 +28,11 @@ export default async function dbConnect() {
         cached.promise = mongoose
             .connect(MONGODB_URI, opts)
             .then((mongoose) => {
-                console.log("✅ MongoDB Connected");
+
                 return mongoose;
             })
             .catch((err) => {
-                console.error("❌ MongoDB Connection Error:", err);
+
                 throw err;
             });
     }

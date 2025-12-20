@@ -14,24 +14,24 @@ async function checkData() {
             throw new Error("MONGODB_URI is missing");
         }
         await mongoose.connect(process.env.MONGODB_URI, { dbName: "bharatkibat" });
-        console.log("Connected to DB");
+
 
         // Wait a tick to ensure connection is ready
         await new Promise(resolve => setTimeout(resolve, 1000));
 
 
         const allContent = await Content.find({});
-        console.log(`Total documents: ${allContent.length}`);
+
 
         const publishedNews = await Content.find({ type: "news", published: true });
-        console.log(`Published News documents: ${publishedNews.length}`);
+
 
         if (allContent.length > 0) {
-            console.log("Sample Document:", JSON.stringify(allContent[0], null, 2));
+
         }
 
     } catch (e) {
-        console.error(e);
+
     } finally {
         await mongoose.disconnect();
     }

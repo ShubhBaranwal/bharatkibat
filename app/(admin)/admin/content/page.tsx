@@ -28,7 +28,7 @@ const ContentPage = () => {
             .then(json => {
                 if (json.success) setContents(json.data);
             })
-            .catch(console.error)
+            .catch(() => { })
             .finally(() => setLoading(false));
     }, []);
 
@@ -47,7 +47,7 @@ const ContentPage = () => {
                 router.refresh();
             }
         } catch (error) {
-            console.error(error);
+
         }
     };
 

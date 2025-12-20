@@ -5,6 +5,7 @@ import Navbar from "@/components/userComponents/Navbar";
 import Header from "@/components/userComponents/Header";
 import BiographyHeader from "@/components/userComponents/BiographyHeader";
 import { Analytics } from "@vercel/analytics/next"
+import Footer from "@/components/userComponents/Footer";
 
 
 const geistSans = Geist({
@@ -30,7 +31,7 @@ export default function WebsiteLayout({ children }: { children: React.ReactNode 
                 {/* <BiographyHeader /> */}
                 {children}
                 <Analytics />
-
+                <Footer />
             </body>
         </html>
     );

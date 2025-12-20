@@ -2,10 +2,21 @@
 
 import Image from "next/image";
 import React from "react";
-import { cn } from "@/lib/utils"; // Assuming you have a utility for class merging, if not I'll use template literals
+import { cn } from "@/lib/utils";
 
-// Types based on your Block Schema
-type BlockType = "heading" | "paragraph" | "image" | "quote" | "list" | "timeline" | "embed" | "factBox";
+/* ============================
+   TYPES (Schema-aligned)
+============================ */
+
+type BlockType =
+    | "heading"
+    | "paragraph"
+    | "image"
+    | "quote"
+    | "list"
+    | "timeline"
+    | "embed"
+    | "factBox";
 
 interface BlockData {
     text?: string;
@@ -15,11 +26,19 @@ interface BlockData {
     items?: string[];
     style?: "ordered" | "unordered";
     withBackground?: boolean;
-    // Add other specific data fields as needed
+
+    // timeline
+    events?: { date?: string; title: string; description?: string }[];
+
+    // embed
+    url?: string;
+
+    // factBox
+    facts?: { label: string; value: string }[];
 }
 
 interface Block {
-    _id?: string;
+    blockId?: string;
     type: BlockType;
     data: BlockData;
 }
@@ -29,100 +48,179 @@ interface BlockRendererProps {
     className?: string;
 }
 
-const HeadingBlock = ({ data }: { data: BlockData }) => {
+/* ============================
+   BLOCK COMPONENTS
+============================ */
+
+const HeadingBlock = React.memo(({ data }: { data: BlockData }) => {
     const Tag = data.level === 1 ? "h1" : data.level === 3 ? "h3" : "h2";
-    // Tailwind classes for premium typography
-    const classes = {
-        h1: "text-3xl md:text-4xl font-extrabold text-[var(--dark-blue)] mt-8 mb-4 leading-tight",
-        h2: "text-2xl md:text-3xl font-bold text-[var(--dark-blue)] mt-8 mb-4 leading-snug border-l-4 border-[var(--light-red)] pl-4",
-        h3: "text-xl md:text-2xl font-semibold text-[var(--shade-black)] mt-6 mb-3",
+
+    const classes: Record<string, string> = {
+        h1: "text-3xl md:text-4xl font-extrabold mt-10 mb-5 text-gray-900",
+        h2: "text-2xl md:text-3xl font-bold mt-10 mb-4 border-l-4 border-red-600 pl-4",
+        h3: "text-xl md:text-2xl font-semibold mt-8 mb-3 text-gray-800",
     };
 
     return <Tag className={classes[Tag]}>{data.text}</Tag>;
-};
+});
 
-const ParagraphBlock = ({ data }: { data: BlockData }) => {
-    return (
-        <p className="text-lg md:text-[1.15rem] leading-relaxed text-gray-800 mb-6 font-serif">
-            {data.text}
-        </p>
-    );
-};
+const ParagraphBlock = React.memo(({ data }: { data: BlockData }) => (
+    <p className="text-[1.05rem] md:text-lg leading-relaxed text-gray-800 mb-6">
+        {data.text}
+    </p>
+));
 
-const ImageBlock = ({ data }: { data: BlockData }) => {
+const ImageBlock = React.memo(({ data }: { data: BlockData }) => {
     if (!data.file?.url) return null;
 
     return (
-        <figure className="my-8 relative overflow-hidden rounded-xl shadow-sm">
-            <div className="relative aspect-video w-full bg-gray-100">
+        <figure className="my-8">
+            <div className="relative aspect-video overflow-hidden rounded-xl bg-gray-100">
                 <Image
                     src={data.file.url}
-                    alt={data.caption || "Content image"}
+                    alt={data.caption || "News image"}
                     fill
-                    className="object-cover transition-transform duration-700 hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 60vw"
+                    priority={false}
+                    sizes="(max-width:768px) 100vw, 75vw"
+                    className="object-cover"
                 />
             </div>
             {data.caption && (
-                <figcaption className="mt-3 text-center text-sm text-gray-500 italic">
+                <figcaption className="text-sm text-center text-gray-500 mt-2">
                     {data.caption}
                 </figcaption>
             )}
         </figure>
     );
-};
+});
 
-const QuoteBlock = ({ data }: { data: BlockData }) => {
-    return (
-        <blockquote className="my-8 p-6 md:p-8 bg-blue-50/50 border-l-4 border-[var(--light-red)] rounded-r-xl">
-            <p className="text-xl md:text-2xl font-serif text-[var(--dark-blue)] italic leading-relaxed">
-                "{data.text}"
-            </p>
-            {data.caption && (
-                <footer className="mt-4 text-base font-medium text-[var(--light-red)]">
-                    — {data.caption}
-                </footer>
-            )}
-        </blockquote>
-    );
-};
+const QuoteBlock = React.memo(({ data }: { data: BlockData }) => (
+    <blockquote className="my-8 p-6 bg-gray-50 border-l-4 border-red-600 rounded">
+        <p className="text-xl italic text-gray-900 leading-relaxed">
+            “{data.text}”
+        </p>
+        {data.caption && (
+            <footer className="mt-3 text-sm font-medium text-red-600">
+                — {data.caption}
+            </footer>
+        )}
+    </blockquote>
+));
 
-const ListBlock = ({ data }: { data: BlockData }) => {
+const ListBlock = React.memo(({ data }: { data: BlockData }) => {
     const Tag = data.style === "ordered" ? "ol" : "ul";
     return (
-        <Tag className={`my-6 pl-6 space-y-3 ${data.style === "ordered" ? "list-decimal" : "list-disc"} marker:text-[var(--light-red)]`}>
-            {data.items?.map((item, index) => (
-                <li key={index} className="text-lg text-gray-800 leading-relaxed pl-2">
+        <Tag
+            className={cn(
+                "my-6 pl-6 space-y-2",
+                data.style === "ordered" ? "list-decimal" : "list-disc"
+            )}
+        >
+            {data.items?.map((item, i) => (
+                <li key={i} className="text-lg text-gray-800">
                     {item}
                 </li>
             ))}
         </Tag>
     );
-};
+});
 
-export default function BlockRenderer({ blocks, className }: BlockRendererProps) {
-    if (!blocks || blocks.length === 0) return null;
+/* ============================
+   NEW BLOCKS (Schema-safe)
+============================ */
+
+const TimelineBlock = ({ data }: { data: BlockData }) => {
+    if (!data.events?.length) return null;
 
     return (
-        <div className={cn("prose prose-lg max-w-none prose-headings:font-bold prose-a:text-[var(--light-red)]", className)}>
-            {blocks.map((block, index) => {
+        <div className="my-10 space-y-6 border-l-2 border-gray-200 pl-6">
+            {data.events.map((e, i) => (
+                <div key={i}>
+                    {e.date && (
+                        <div className="text-sm text-red-600 font-medium">{e.date}</div>
+                    )}
+                    <h4 className="text-lg font-semibold">{e.title}</h4>
+                    {e.description && (
+                        <p className="text-gray-700 mt-1">{e.description}</p>
+                    )}
+                </div>
+            ))}
+        </div>
+    );
+};
+
+const EmbedBlock = ({ data }: { data: BlockData }) => {
+    if (!data.url) return null;
+
+    return (
+        <div className="my-8 aspect-video w-full">
+            <iframe
+                src={data.url}
+                loading="lazy"
+                className="w-full h-full rounded-lg border"
+                allowFullScreen
+            />
+        </div>
+    );
+};
+
+const FactBoxBlock = ({ data }: { data: BlockData }) => {
+    if (!data.facts?.length) return null;
+
+    return (
+        <aside className="my-8 bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+            <h3 className="text-lg font-bold mb-4">📌 तथ्य संक्षेप</h3>
+            <ul className="space-y-2">
+                {data.facts.map((fact, i) => (
+                    <li key={i} className="flex justify-between gap-4 text-sm">
+                        <span className="font-medium text-gray-700">{fact.label}</span>
+                        <span className="text-gray-900">{fact.value}</span>
+                    </li>
+                ))}
+            </ul>
+        </aside>
+    );
+};
+
+/* ============================
+   MAIN RENDERER
+============================ */
+
+export default function BlockRenderer({
+    blocks,
+    className,
+}: BlockRendererProps) {
+    if (!blocks?.length) return null;
+
+    return (
+        <article
+            className={cn(
+                "max-w-none text-base prose-headings:scroll-mt-24",
+                className
+            )}
+        >
+            {blocks.map((block) => {
                 switch (block.type) {
                     case "heading":
-                        return <HeadingBlock key={index} data={block.data} />;
+                        return <HeadingBlock key={block.blockId} data={block.data} />;
                     case "paragraph":
-                        return <ParagraphBlock key={index} data={block.data} />;
+                        return <ParagraphBlock key={block.blockId} data={block.data} />;
                     case "image":
-                        return <ImageBlock key={index} data={block.data} />;
+                        return <ImageBlock key={block.blockId} data={block.data} />;
                     case "quote":
-                        return <QuoteBlock key={index} data={block.data} />;
+                        return <QuoteBlock key={block.blockId} data={block.data} />;
                     case "list":
-                        return <ListBlock key={index} data={block.data} />;
+                        return <ListBlock key={block.blockId} data={block.data} />;
+                    case "timeline":
+                        return <TimelineBlock key={block.blockId} data={block.data} />;
+                    case "embed":
+                        return <EmbedBlock key={block.blockId} data={block.data} />;
+                    case "factBox":
+                        return <FactBoxBlock key={block.blockId} data={block.data} />;
                     default:
-                        // Fallback for unimplemented blocks
-                        console.warn(`Unsupported block type: ${block.type}`);
                         return null;
                 }
             })}
-        </div>
+        </article>
     );
 }

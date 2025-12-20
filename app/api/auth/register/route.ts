@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
         );
 
     } catch (error: unknown) {
-        console.error("Registration error:", error);
+
 
         // Handle duplicate key errors (though unlikely for first user, good practice)
         if ((error as any).code === 11000) {

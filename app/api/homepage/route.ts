@@ -13,7 +13,7 @@ export async function GET() {
             },
         });
     } catch (error) {
-        console.error("Error fetching homepage data:", error);
+
         return NextResponse.json(
             { error: "Internal Server Error" },
             { status: 500 }

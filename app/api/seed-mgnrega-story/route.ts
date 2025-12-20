@@ -210,7 +210,7 @@ export async function GET() {
 
         return NextResponse.json({ success: true, story });
     } catch (error: any) {
-        console.error("Error creating story:", error);
+
         return NextResponse.json({ success: false, error: error.message }, { status: 500 });
     }
 }

@@ -61,7 +61,7 @@ const EpisodeList: React.FC<EpisodeListProps> = ({ parentContentId, episodes }) 
 
                 setEpisodeList(validEpisodes);
             } catch (err) {
-                console.error("Error fetching episodes", err);
+
             } finally {
                 setLoading(false);
             }
@@ -83,7 +83,7 @@ const EpisodeList: React.FC<EpisodeListProps> = ({ parentContentId, episodes }) 
                 alert("Failed to delete");
             }
         } catch (error) {
-            console.error(error);
+
         }
     };
 

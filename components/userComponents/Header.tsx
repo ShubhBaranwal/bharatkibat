@@ -14,7 +14,7 @@ interface Category {
 
 const Header = () => {
   const [categories, setCategories] = useState<Category[]>([]);
-  console.log(categories);
+
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -22,10 +22,10 @@ const Header = () => {
         const res = await fetch("/api/categories");
         const json = await res.json();
         if (json.success) setCategories(json.data);
-        console.log(json.data);
+
 
       } catch {
-        console.error("Category fetch failed");
+
       }
     };
     fetchCategories();
@@ -67,7 +67,7 @@ const Header = () => {
 
           {/* Categories */}
           <nav aria-label="Primary Navigation" className="">
-            <ul className="flex items-center gap-4 text-[15px] font-semibold">
+            <ul className="flex items-center gap-4 text-[1.1vw] font-semibold">
               {categories.map((cat) => (
                 <li key={cat._id}>
                   <Link
@@ -97,8 +97,9 @@ const Header = () => {
         <nav aria-label="Primary Navigation">
           <ul
             className="
-              flex items-center gap-2
-              overflow-x-auto scrollbar-hide
+              flex items-center gap-[10px] gap-y-[15px]
+              overflow-hidden flex-wrap
+              justify-center
               px-3 py-3
               text-[14px] font-semibold
               text-[var(--white)]

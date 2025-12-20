@@ -28,7 +28,7 @@ const CategoryTable: React.FC<CategoryTableProps> = ({ categories }) => {
                 alert("Failed to delete category");
             }
         } catch (error) {
-            console.error(error);
+
             alert("Error deleting category");
         }
     };

@@ -3,7 +3,7 @@ import dbConnect from "@/lib/db";
 import Category from "@/models/Category";
 import { z } from "zod";
 import slugify from "slugify";
-import { log } from "console";
+
 
 // Validation Schema
 const CategorySchema = z.object({
@@ -26,7 +26,7 @@ export async function GET() {
     try {
         await dbConnect();
         const categories = await Category.find().sort({ priority: -1, createdAt: -1 });
-        console.log(categories);
+
         return NextResponse.json({ success: true, data: categories }, { status: 200 });
     } catch (error: unknown) {
         const message = error instanceof Error ? error.message : "Unknown error";
@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
 
         // Validate
         const validData = CategorySchema.parse(body);
-        console.log(validData);
+
 
         // Determine Slug
         const slug = validData.slug

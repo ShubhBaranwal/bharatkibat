@@ -19,7 +19,7 @@ const EditContentPage = ({ params }: { params: Promise<{ id: string }> }) => {
             .then(json => {
                 if (json.success) setContent(json.data);
             })
-            .catch(console.error)
+            .catch(() => { })
             .finally(() => setLoading(false));
     }, [id]);
 

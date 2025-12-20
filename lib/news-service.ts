@@ -35,7 +35,7 @@ export async function getHeroNews() {
             sideNews,
         };
     } catch (error) {
-        console.error("Error fetching hero news:", error);
+
         return {
             featured: null,
             sideNews: [],

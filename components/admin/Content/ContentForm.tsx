@@ -73,7 +73,7 @@ const ContentForm: React.FC<ContentFormProps> = ({ initialData, isEdit = false }
                 const json = await res.json();
                 if (json.success) setCategories(json.data);
             } catch (err) {
-                console.error("Failed to load categories", err);
+
             }
         };
         fetchCategories();

@@ -38,12 +38,12 @@ const BlockManager: React.FC<BlockManagerProps> = ({ contentId, initialBlocks, a
                 setBlocks(json.data.contentBlocks);
                 return true;
             } else {
-                console.error("Server Error:", json.error);
+
                 alert(`Failed to save: ${JSON.stringify(json.error)}`);
                 return false;
             }
         } catch (error) {
-            console.error(error);
+
             alert("Error checking save: Network error");
             return false;
         }
