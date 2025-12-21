@@ -7,6 +7,7 @@ import BiographyHeader from "@/components/userComponents/BiographyHeader";
 import { Analytics } from "@vercel/analytics/next"
 import Footer from "@/components/userComponents/Footer";
 
+import Script from "next/script";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -25,6 +26,20 @@ export const metadata: Metadata = {
 export default function WebsiteLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
+            <head>
+                <Script
+                    src="https://www.googletagmanager.com/gtag/js?id=G-0JNR5V1ZGY"
+                    strategy="afterInteractive"
+                />
+                <Script id="ga4" strategy="afterInteractive">
+                    {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-0JNR5V1ZGY');
+          `}
+                </Script>
+            </head>
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
                 <Navbar />
                 <Header />
@@ -36,3 +51,7 @@ export default function WebsiteLayout({ children }: { children: React.ReactNode 
         </html>
     );
 }
+
+// G-0JNR5V1ZGY   mesid
+// Stream ID
+// 13169858694
