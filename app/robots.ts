@@ -1,13 +1,11 @@
-/**
- * WHY?
- * ----
- * - Search engines use this to learn access rules
- * - Enables Google crawling immediately after launch
- */
+import type { MetadataRoute } from "next";
 
-export default function robots() {
+export default function robots(): MetadataRoute.Robots {
   return {
-    rules: [{ userAgent: "*", allow: "/" }], // Allow all pages
-    sitemap: "https://bharatkibaat.com/sitemap.xml",
-  }
+    rules: {
+      userAgent: "*",
+      allow: "/",
+    },
+    sitemap: "https://www.bharatkibat.com/sitemap.xml",
+  };
 }
