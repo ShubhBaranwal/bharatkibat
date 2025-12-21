@@ -6,7 +6,7 @@ import { Loader2 } from "lucide-react";
 
 interface Block {
     blockId?: string;
-    type: "heading" | "paragraph" | "image" | "quote" | "list" | "embed";
+    type: "heading" | "paragraph" | "image" | "quote" | "list" | "embed" | "factBox" | "timeline";
     data: any;
 }
 
@@ -174,6 +174,75 @@ const BlockManager: React.FC<BlockManagerProps> = ({ contentId, initialBlocks, a
                         />
                     </div>
                 );
+            case "factBox":
+                return (
+                    <div className="space-y-2">
+                        <input
+                            className="w-full bg-gray-800 border border-gray-700 p-2 rounded font-bold"
+                            placeholder="Fact Box Title (e.g. Key Highlights)"
+                            value={newBlockData.title || ""}
+                            onChange={(e) => setNewBlockData({ ...newBlockData, title: e.target.value })}
+                        />
+                        <textarea
+                            className="w-full bg-gray-800 border border-gray-700 p-2 rounded h-32 font-mono text-sm"
+                            placeholder="Enter facts (one per line)&#10;Label: Value&#10;Born: 1995&#10;City: New York"
+                            value={Array.isArray(newBlockData.facts) ? newBlockData.facts.join('\n') : (newBlockData.facts || "")}
+                            onChange={(e) => setNewBlockData({ ...newBlockData, facts: e.target.value.split('\n').filter((line: string) => line.trim() !== '') })}
+                        />
+                        <p className="text-xs text-gray-500">Format: "Label: Value" per line.</p>
+                    </div>
+                );
+            case "list":
+                return (
+                    <div className="space-y-2">
+                        <select
+                            className="w-full bg-gray-800 border border-gray-700 p-2 rounded"
+                            value={newBlockData.style || "unordered"}
+                            onChange={(e) => setNewBlockData({ ...newBlockData, style: e.target.value })}
+                        >
+                            <option value="unordered">Unordered (Bullet Points)</option>
+                            <option value="ordered">Ordered (Numbered)</option>
+                        </select>
+                        <textarea
+                            className="w-full bg-gray-800 border border-gray-700 p-2 rounded h-32"
+                            placeholder="List items (one per line)..."
+                            value={Array.isArray(newBlockData.items) ? newBlockData.items.join('\n') : (newBlockData.items || "")}
+                            onChange={(e) => setNewBlockData({ ...newBlockData, items: e.target.value.split('\n').filter((l: string) => l.trim() !== '') })}
+                        />
+                    </div>
+                );
+            case "embed":
+                return (
+                    <input
+                        className="w-full bg-gray-800 border border-gray-700 p-2 rounded"
+                        placeholder="Embed URL (YouTube, Tweet, etc.)"
+                        value={newBlockData.url || ""}
+                        onChange={(e) => setNewBlockData({ ...newBlockData, url: e.target.value })}
+                    />
+                );
+            case "timeline":
+                return (
+                    <div className="space-y-2">
+                        <textarea
+                            className="w-full bg-gray-800 border border-gray-700 p-2 rounded h-40 font-mono text-sm"
+                            placeholder="Enter events (one per line)&#10;Date | Title | Description&#10;2020 | Event Name | Details..."
+                            value={newBlockData._rawTimeline || ""}
+                            onChange={(e) => {
+                                const raw = e.target.value;
+                                const events = raw.split('\n').filter((l: string) => l.trim()).map((l: string) => {
+                                    const parts = l.split('|');
+                                    return {
+                                        date: parts[0]?.trim(),
+                                        title: parts[1]?.trim(),
+                                        description: parts[2]?.trim()
+                                    };
+                                });
+                                setNewBlockData({ ...newBlockData, _rawTimeline: raw, events });
+                            }}
+                        />
+                        <p className="text-xs text-gray-500">Format: "Date | Title | Description" per line.</p>
+                    </div>
+                );
             default:
                 return (
                     <textarea
@@ -220,6 +289,36 @@ const BlockManager: React.FC<BlockManagerProps> = ({ contentId, initialBlocks, a
                                     <span className="text-xs not-italic text-gray-500">- {block.data.caption}</span>
                                 </blockquote>
                             )}
+                            {block.type === 'factBox' && (
+                                <div className="bg-yellow-900/20 border border-yellow-700/50 p-3 rounded">
+                                    <h5 className="font-bold text-yellow-500 text-sm mb-2">{block.data.title || "Fact Box"}</h5>
+                                    <ul className="text-xs text-gray-400 list-disc pl-4">
+                                        {block.data.facts?.slice(0, 3).map((f: any, i: number) => (
+                                            <li key={i}>{typeof f === 'string' ? f : `${f.label}: ${f.value}`}</li>
+                                        ))}
+                                        {block.data.facts?.length > 3 && <li>...</li>}
+                                    </ul>
+                                </div>
+                            )}
+                            {block.type === 'list' && (
+                                <ul className={`list-inside text-gray-300 ${block.data.style === 'ordered' ? 'list-decimal' : 'list-disc'}`}>
+                                    {block.data.items?.slice(0, 3).map((item: string, i: number) => <li key={i}>{item}</li>)}
+                                    {block.data.items?.length > 3 && <li>...</li>}
+                                </ul>
+                            )}
+                            {block.type === 'embed' && (
+                                <div className="text-blue-400 text-sm underline truncate">{block.data.url}</div>
+                            )}
+                            {block.type === 'timeline' && (
+                                <div className="border-l-2 border-gray-600 pl-3 space-y-2">
+                                    {block.data.events?.slice(0, 2).map((e: any, i: number) => (
+                                        <div key={i}>
+                                            <span className="text-xs text-red-400">{e.date}</span>
+                                            <p className="text-sm font-bold">{e.title}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
 
                         <div className="flex flex-col gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition">
@@ -247,8 +346,8 @@ const BlockManager: React.FC<BlockManagerProps> = ({ contentId, initialBlocks, a
                 <div id="block-form" className="bg-gray-800 p-4 rounded border border-blue-500/50 shadow-lg shadow-blue-500/10">
                     <div className="flex justify-between items-center mb-4">
                         <h4 className="text-sm font-bold uppercase text-blue-400">{editingIndex !== null ? 'Editing Block' : 'New Block'}</h4>
-                        <div className="flex gap-2">
-                            {["heading", "paragraph", "image", "quote"].map((t) => (
+                        <div className="flex gap-2 flex-wrap">
+                            {["heading", "paragraph", "image", "quote", "list", "embed", "timeline", "factBox"].map((t) => (
                                 <button
                                     key={t}
                                     onClick={() => { if (t !== newBlockType) { setNewBlockType(t as any); setNewBlockData({}); } }}

@@ -8,6 +8,7 @@ import Content from "@/models/Content";
 import Category from "@/models/Category";
 import { format } from "date-fns";
 import { hi } from "date-fns/locale";
+import CardShareMini from "@/components/userComponents/CardShareMini";
 
 interface PageProps {
     params: Promise<{
@@ -149,6 +150,9 @@ export default async function CategoryPage(props: PageProps) {
                                     {/* Date Badge on Image */}
                                     <div className="absolute bottom-4 left-4 text-white text-xs font-medium px-2 py-1 bg-black/50 backdrop-blur-sm rounded-md">
                                         {format(new Date(item.createdAt), "d MMM, yyyy", { locale: hi })}
+                                    </div>
+                                    <div className="absolute top-3 right-3 z-10">
+                                        <CardShareMini slug={item.slug} title={item.title} />
                                     </div>
                                 </div>
 

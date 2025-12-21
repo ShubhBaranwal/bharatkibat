@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 const FALLBACK_IMAGE =
-    "/7329452be6c72af2e5c24d0a0c366e5f1763626636654425_original.jpg";
+    "/7329452be6c72af2e5c24d0a0c366e5f1763626636654425_original.png";
 
 /* ===================== TYPES ===================== */
 

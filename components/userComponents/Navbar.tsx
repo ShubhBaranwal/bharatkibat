@@ -5,30 +5,33 @@ import {
     FaFacebookF,
     FaInstagram,
     FaWhatsapp,
-    FaYoutube,
+
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+
 import { memo } from "react";
 
 const socialLinks = [
     {
         name: "Facebook",
-        url: "https://facebook.com/",
+        url: "https://www.facebook.com/profile.php?id=61584098969969",
         icon: FaFacebookF,
     },
     {
         name: "Instagram",
-        url: "https://instagram.com/",
+        url: "https://www.instagram.com/bharatkibatnews/",
         icon: FaInstagram,
     },
     {
         name: "WhatsApp",
-        url: "https://wa.me/91XXXXXXXXXX",
+        url: "https://chat.whatsapp.com/LQ1TIhZFZyk0PeOGs3VJnX",
         icon: FaWhatsapp,
     },
+
     {
-        name: "YouTube",
-        url: "https://youtube.com/",
-        icon: FaYoutube,
+        name: "X",
+        url: "https://x.com/BatKi6140",
+        icon: FaXTwitter,
     },
 ];
 

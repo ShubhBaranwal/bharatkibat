@@ -34,7 +34,7 @@ interface BlockData {
     url?: string;
 
     // factBox
-    facts?: { label: string; value: string }[];
+    facts?: (string | { label: string; value: string })[];
 }
 
 interface Block {
@@ -164,19 +164,35 @@ const EmbedBlock = ({ data }: { data: BlockData }) => {
     );
 };
 
-const FactBoxBlock = ({ data }: { data: BlockData }) => {
+const FactBoxBlock = ({ data }: { data: BlockData & { title?: string; facts?: (string | { label: string; value: string })[] } }) => {
     if (!data.facts?.length) return null;
 
     return (
-        <aside className="my-8 bg-yellow-50 border border-yellow-200 rounded-xl p-6">
-            <h3 className="text-lg font-bold mb-4">📌 तथ्य संक्षेप</h3>
-            <ul className="space-y-2">
-                {data.facts.map((fact, i) => (
-                    <li key={i} className="flex justify-between gap-4 text-sm">
-                        <span className="font-medium text-gray-700">{fact.label}</span>
-                        <span className="text-gray-900">{fact.value}</span>
-                    </li>
-                ))}
+        <aside className="my-6 md:my-8 bg-yellow-50 border border-yellow-200 rounded-xl p-4 md:p-6 shadow-sm">
+            <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-yellow-900 flex items-center gap-2">
+                <span>📌</span> {data.title || "तथ्य संक्षेप"}
+            </h3>
+            <ul className="space-y-3 md:space-y-2">
+                {data.facts.map((fact, i) => {
+                    let label = "";
+                    let value = "";
+
+                    if (typeof fact === "string") {
+                        const parts = fact.split(":");
+                        label = parts[0]?.trim();
+                        value = parts.slice(1).join(":")?.trim();
+                    } else {
+                        label = fact.label;
+                        value = fact.value;
+                    }
+
+                    return (
+                        <li key={i} className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 sm:gap-4 text-sm md:text-base border-b border-yellow-100 last:border-0 pb-2 last:pb-0 sm:border-0 sm:pb-0">
+                            <span className="font-semibold text-gray-800 sm:min-w-[140px]">{label}</span>
+                            <span className="text-gray-900 text-left sm:text-right leading-relaxed">{value}</span>
+                        </li>
+                    );
+                })}
             </ul>
         </aside>
     );

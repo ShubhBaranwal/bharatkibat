@@ -9,6 +9,7 @@ import Category from "@/models/Category";
 import BlockRenderer from "@/components/userComponents/BlockRenderer";
 import { format } from "date-fns";
 import { hi } from "date-fns/locale";
+import ArticleShareBar from "@/components/userComponents/ArticleShareBar";
 
 interface PageProps {
     params: Promise<{
@@ -184,6 +185,7 @@ export default async function ContentPage(props: PageProps) {
                                     <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center font-bold text-red-600">
                                         {content.author?.charAt(0) || "A"}
                                     </div>
+
                                     <div className="leading-tight">
                                         <p className="text-sm font-bold text-gray-900" itemProp="author">
                                             {content.author || "Bharat Ki Baat Desk"}
@@ -193,6 +195,7 @@ export default async function ContentPage(props: PageProps) {
                                         </p>
                                     </div>
                                 </div>
+                                <ArticleShareBar title={content.title} />
                             </header>
 
                             {/* Main Body */}
