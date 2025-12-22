@@ -171,8 +171,8 @@ export default async function ContentPage(props: PageProps) {
                                             {content.categoryId.uiLabel || content.categoryId.name}
                                         </Link>
                                     )}
-                                    <span className="text-xs font-semibold text-gray-400 uppercase tracking-widest">
-                                        {format(new Date(content.createdAt), "d MMMM yyyy", { locale: hi })}
+                                    <span className="text-xs font-semibold text-gray-400 uppercase tracking-widest" suppressHydrationWarning>
+                                        {content.createdAt ? format(new Date(content.createdAt), "d MMMM yyyy", { locale: hi }) : ""}
                                     </span>
                                 </div>
 

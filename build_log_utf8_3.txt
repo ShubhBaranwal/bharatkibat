@@ -1,0 +1,63 @@
+﻿
+> news_website@0.1.0 build
+> next build
+
+   Γû▓ Next.js 16.0.7 (Turbopack)
+   - Environments: .env.local, .env
+
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully in 7.9s
+   Running TypeScript ...
+   Collecting page data using 11 workers ...
+   Generating static pages using 11 workers (0/26) ...
+   Generating static pages using 11 workers (6/26) 
+   Generating static pages using 11 workers (12/26) 
+   Generating static pages using 11 workers (19/26) 
+ Γ£ô Generating static pages using 11 workers (26/26) in 6.7s
+   Finalizing page optimization ...
+
+Route (app)                                  Revalidate  Expire
+Γöî Γùï /                                                1m      1y
+Γö£ Γùï /_not-found
+Γö£ ╞Æ /[slug]
+Γö£ Γùï /about-us
+Γö£ ╞Æ /admin
+Γö£ Γùï /admin/category
+Γö£ ╞Æ /admin/category/[id]
+Γö£ Γùï /admin/category/create
+Γö£ Γùï /admin/content
+Γö£ ╞Æ /admin/content/[id]
+Γö£ ╞Æ /admin/content/[id]/episode/[episodeId]
+Γö£ ╞Æ /admin/content/[id]/episode/create
+Γö£ Γùï /admin/content/create
+Γö£ ╞Æ /api/auth/check-login
+Γö£ ╞Æ /api/auth/login
+Γö£ ╞Æ /api/auth/register
+Γö£ ╞Æ /api/categories
+Γö£ ╞Æ /api/categories/[id]
+Γö£ ╞Æ /api/content
+Γö£ ╞Æ /api/content/[id]
+Γö£ ╞Æ /api/episodes
+Γö£ ╞Æ /api/episodes/[id]
+Γö£ ╞Æ /api/homepage
+Γö£ ╞Æ /api/public/hero-news
+Γö£ ╞Æ /api/seed-mamata-biography
+Γö£ ╞Æ /api/seed-mgnrega-story
+Γö£ ╞Æ /api/seed-rahul
+Γö£ ╞Æ /api/seed-yogi
+Γö£ ╞Æ /category/[slug]
+Γö£ Γùï /contact-us
+Γö£ Γùï /disclaimer
+Γö£ Γùï /login
+Γö£ Γùï /privacy-policy
+Γö£ Γùï /robots.txt
+Γö£ Γùï /sitemap.xml
+Γö£ Γùï /terms-and-conditions
+Γöö Γùï /user
+
+
+╞Æ Proxy (Middleware)
+
+Γùï  (Static)   prerendered as static content
+╞Æ  (Dynamic)  server-rendered on demand
+

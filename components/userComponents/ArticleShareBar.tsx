@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiLink } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 
@@ -11,8 +11,11 @@ interface ArticleShareBarProps {
 export default function ArticleShareBar({ title }: ArticleShareBarProps) {
     const [copied, setCopied] = useState(false);
 
-    const currentUrl =
-        typeof window !== "undefined" ? window.location.href : "";
+    const [currentUrl, setCurrentUrl] = useState("");
+
+    useEffect(() => {
+        setCurrentUrl(window.location.href);
+    }, []);
 
     const copyLink = async () => {
         try {

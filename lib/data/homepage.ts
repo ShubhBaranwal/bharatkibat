@@ -13,48 +13,70 @@ export type HomepageCategoryData = {
 };
 
 export async function getHomepageData(): Promise<HomepageCategoryData[]> {
+    // ⭐ Ensure DB connection before any query
     await dbConnect();
 
-    const categories = await Category.find({
-        isActive: true,
-    })
+    // ⭐ Fetch only active categories, ordered by priority
+    const categories = await Category.find({ isActive: true })
         .sort({ priority: 1 })
         .limit(5)
         .lean();
 
     const homepageData = await Promise.all(
         categories.map(async (cat) => {
+
+            // ⭐ Fetch enough items for layout:
+            // ⭐ 1 (left) + 4 (middle) + 8 (right) = 13
             const items = await Content.find({
                 categoryId: cat._id,
                 published: true,
             })
                 .sort({ createdAt: -1 })
-                .limit(6)
+                .limit(13) // ⭐ IMPORTANT: prevents right column from going empty
                 .select("title slug coverImage type createdAt author categoryId")
                 .lean();
 
-            // Serialization for client components if needed (Next.js passes JSON to client components)
-            // Mongoose lean() returns POJO.
-            // We map items to ensure proper serialization and fallback handling.
-            const serializableItems = items.map((item: any) => ({
-                ...item,
-                id: item._id ? item._id.toString() : "",
-                image: item.coverImage || null,
-                slug: item.slug,
-                _id: item._id ? item._id.toString() : "",
-                categoryId: item.categoryId ? item.categoryId.toString() : "",
-                createdAt: item.createdAt ? item.createdAt.toISOString() : null,
-                updatedAt: item.updatedAt ? item.updatedAt.toISOString() : null,
-            }));
+            // ⭐ Defensive serialization (prevents runtime crashes)
+            const serializableItems = Array.isArray(items)
+                ? items.map((item: any) => ({
+                    ...item,
+                    id: item._id?.toString() || "", // ⭐ Client-safe ID
+                    _id: item._id?.toString() || "",
+                    slug: item.slug,
+                    image: item.coverImage || null, // ⭐ Image fallback
+                    categoryId: item.categoryId?.toString() || "",
+                    createdAt: item.createdAt
+                        ? item.createdAt.toISOString()
+                        : null
+                }))
+                : [];
+
+            // ⭐ SAFE LAYOUT SPLIT (NO UI BREAK POSSIBLE)
+            const left =
+                serializableItems.length > 0
+                    ? serializableItems[0]
+                    : null;
+
+            // ⭐ Middle gets max 4 items (index 1–4)
+            const middle =
+                serializableItems.length > 1
+                    ? serializableItems.slice(1, 5)
+                    : [];
+
+            // ⭐ Right gets max 8 items (index 5–12)
+            const right =
+                serializableItems.length > 5
+                    ? serializableItems.slice(5, 13) // ⭐ FIXED: was 20 earlier
+                    : [];
 
             return {
                 category: {
-                    name: cat.uiLabel || cat.name, // Fallback to name if uiLabel is missing, though schema says required.
+                    name: cat.uiLabel || cat.name, // ⭐ Safe fallback
                     slug: cat.slug,
                 },
-                left: serializableItems[0] || null,
-                middle: serializableItems.slice(1, 3),
-                right: serializableItems.slice(3, 6),
+                left,
+                middle,
+                right,
             };
         })
     );

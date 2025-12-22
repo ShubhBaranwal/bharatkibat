@@ -1,0 +1,25 @@
+
+> news_website@0.1.0 build
+> next build
+
+   ▲ Next.js 16.0.7 (Turbopack)
+   - Environments: .env.local, .env
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 33.2s
+   Running TypeScript ...
+   Collecting page data using 11 workers ...
+   Generating static pages using 11 workers (0/26) ...
+   Generating static pages using 11 workers (6/26) 
+   Generating static pages using 11 workers (12/26) 
+   Generating static pages using 11 workers (19/26) 
+Error occurred prerendering page "/". Read more: https://nextjs.org/docs/messages/prerender-error
+MongoNetworkTimeoutError: connection 1 to 159.41.242.254:27017 timed out
+    at ignore-listed frames {
+  errorLabelSet: [Set],
+  beforeHandshake: true,
+  connectionGeneration: 0,
+  digest: '941310105'
+}
+Export encountered an error on /(user)/page: /, exiting the build.
+ ⨯ Next.js build worker exited with code: 1 and signal: null

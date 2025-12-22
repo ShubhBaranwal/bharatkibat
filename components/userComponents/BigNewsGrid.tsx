@@ -137,6 +137,7 @@ export default function BigNewsGrid({
                                     href={`/${item.slug}`}
                                     className="text-[15px] sm:text-base font-semibold leading-snug text-[var(--shade-black)] hover:text-[var(--light-red)] transition-colors"
                                 >
+
                                     {item.title}
                                 </Link>
                             </article>
@@ -149,8 +150,23 @@ export default function BigNewsGrid({
                             {right.map((item) => (
                                 <li
                                     key={item.id}
-                                    className="border-b border-gray-200 last:border-none pb-3"
+                                    className="border-b border-gray-200 last:border-none pb-3 flex gap-[0.5rem] sm:gap-[0.5vw] items-center"
                                 >
+                                    <Link
+                                        href={`/${item.slug}`}
+                                        className="relative w-[2.5rem] h-[2.5rem] flex-shrink-0 overflow-hidden  "
+                                    >
+                                        <NewsImage
+                                            src={
+                                                isValidImage(item.image)
+                                                    ? item.image
+                                                    : FALLBACK_IMAGE
+                                            }
+                                            alt={item.title || "News Image"}
+                                            sizes="112px"
+                                            className="transition-opacity h-full w-full  duration-300 hover:opacity-90 "
+                                        />
+                                    </Link>
                                     <Link
                                         href={`/${item.slug}`}
                                         className="block text-[14px] sm:text-[15px] font-medium leading-snug text-[var(--shade-black)] hover:text-[var(--light-red)] transition-colors"
