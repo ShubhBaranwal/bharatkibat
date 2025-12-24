@@ -1,8 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { cn } from "@/lib/utils";
+import { Copy, Share2, Check } from "lucide-react";
+import CardShareMini from "./CardShareMini";
+import ArticleShareBar from "./ArticleShareBar";
 
 /* ============================
    TYPES (Schema-aligned)
@@ -16,7 +19,8 @@ type BlockType =
     | "list"
     | "timeline"
     | "embed"
-    | "factBox";
+    | "factBox"
+    | "shayari";
 
 interface BlockData {
     text?: string;
@@ -53,7 +57,8 @@ interface BlockRendererProps {
 ============================ */
 
 const HeadingBlock = React.memo(({ data }: { data: BlockData }) => {
-    const Tag = data.level === 1 ? "h1" : data.level === 3 ? "h3" : "h2";
+    const level = data.level ?? 2;
+    const Tag = (level === 1 ? "h1" : level === 3 ? "h3" : "h2") as keyof React.JSX.IntrinsicElements;
 
     const classes: Record<string, string> = {
         h1: "text-3xl md:text-4xl font-extrabold mt-10 mb-5 text-gray-900",
@@ -198,6 +203,77 @@ const FactBoxBlock = ({ data }: { data: BlockData & { title?: string; facts?: (s
     );
 };
 
+const ShayariBlock = ({ data }: { data: BlockData }) => {
+    const [copied, setCopied] = useState(false);
+
+    const handleCopy = async () => {
+        if (!data.text) return;
+
+        // Modern Clipboard API
+        if (navigator.clipboard) {
+            try {
+                await navigator.clipboard.writeText(data.text);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+                return;
+            } catch (err) {
+                console.error("Clipboard API failed:", err);
+            }
+        }
+
+        // Fallback for older browsers
+        try {
+            const textArea = document.createElement("textarea");
+            textArea.value = data.text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch (err) {
+            console.error("Fallback copy failed:", err);
+        }
+    };
+
+    return (
+        <div className="my-8 relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+            <div className="relative bg-white dark:bg-zinc-900 border-t-4 border-pink-500 rounded-lg shadow-xl p-6 md:p-8">
+                <div className="absolute top-0 right-0 p-4 flex gap-2 z-10">
+                    <button
+                        onClick={handleCopy}
+                        className="flex items-center gap-1 px-3 py-1 bg-pink-500 hover:bg-pink-600 text-white rounded-md text-sm"
+                    >
+                        {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                        {copied ? "Copied!" : "Copy"}
+                    </button>
+                </div>
+
+                <div className="text-center space-y-4">
+                    <div className="text-4xl text-pink-200 font-serif leading-none select-none">❝</div>
+
+                    <p className="text-xl md:text-2xl font-medium text-gray-800 dark:text-gray-100 leading-relaxed font-serif whitespace-pre-line px-2 md:px-4">
+                        {data.text}
+                    </p>
+
+                    <div className="text-4xl text-pink-200 font-serif leading-none select-none">❞</div>
+                </div>
+
+                {data.caption && (
+                    <div className="mt-6 text-center text-sm font-semibold text-pink-600 uppercase tracking-wider">
+                        — {data.caption}
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+};
+
+
 /* ============================
    MAIN RENDERER
 ============================ */
@@ -233,6 +309,8 @@ export default function BlockRenderer({
                         return <EmbedBlock key={block.blockId} data={block.data} />;
                     case "factBox":
                         return <FactBoxBlock key={block.blockId} data={block.data} />;
+                    case "shayari":
+                        return <ShayariBlock key={block.blockId} data={block.data} />;
                     default:
                         return null;
                 }
