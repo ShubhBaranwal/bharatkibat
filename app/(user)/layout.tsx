@@ -39,6 +39,12 @@ export default function WebsiteLayout({ children }: { children: React.ReactNode 
             gtag('config', 'G-0JNR5V1ZGY');
           `}
                 </Script>
+                <Script
+                    async
+                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2792598202487179"
+                    crossOrigin="anonymous"
+                    strategy="afterInteractive"
+                />
             </head>
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
                 <Navbar />
