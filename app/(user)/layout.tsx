@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
+
 import Navbar from "@/components/userComponents/Navbar";
 import Header from "@/components/userComponents/Header";
-import BiographyHeader from "@/components/userComponents/BiographyHeader";
-import { Analytics } from "@vercel/analytics/next"
 import Footer from "@/components/userComponents/Footer";
-
-import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -23,10 +22,21 @@ export const metadata: Metadata = {
     title: "Bharat Ki Baat – India's Latest News & Biographies",
 };
 
-export default function WebsiteLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
     return (
         <html lang="en">
             <head>
+                {/* ✅ AdSense VERIFICATION (MOST IMPORTANT) */}
+                <meta
+                    name="google-adsense-account"
+                    content="ca-pub-2792598202487179"
+                />
+
+                {/* ✅ Google Analytics GA4 */}
                 <Script
                     src="https://www.googletagmanager.com/gtag/js?id=G-0JNR5V1ZGY"
                     strategy="afterInteractive"
@@ -39,6 +49,8 @@ export default function WebsiteLayout({ children }: { children: React.ReactNode 
             gtag('config', 'G-0JNR5V1ZGY');
           `}
                 </Script>
+
+                {/* ✅ Google AdSense Script (AUTO ADS) */}
                 <Script
                     async
                     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2792598202487179"
@@ -46,10 +58,13 @@ export default function WebsiteLayout({ children }: { children: React.ReactNode 
                     strategy="afterInteractive"
                 />
             </head>
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
+
+            <body
+                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                suppressHydrationWarning
+            >
                 <Navbar />
                 <Header />
-                {/* <BiographyHeader /> */}
                 {children}
                 <Analytics />
                 <Footer />
@@ -57,7 +72,3 @@ export default function WebsiteLayout({ children }: { children: React.ReactNode 
         </html>
     );
 }
-
-// G-0JNR5V1ZGY   mesid
-// Stream ID
-// 13169858694
