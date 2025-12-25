@@ -3,6 +3,9 @@ import connectDB from "@/lib/db";
 import Content from "@/models/Content";
 import Category from "@/models/Category";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 type SitemapItem = MetadataRoute.Sitemap[number];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

@@ -20,12 +20,15 @@ type BlockType =
     | "timeline"
     | "embed"
     | "factBox"
-    | "shayari";
+    | "shayari"
+    | "link";
 
 interface BlockData {
     text?: string;
     level?: number;
     file?: { url: string };
+    src?: string; // Backwards compatibility / Direct src
+    alt?: string;
     caption?: string;
     items?: string[];
     style?: "ordered" | "unordered";
@@ -39,6 +42,9 @@ interface BlockData {
 
     // factBox
     facts?: (string | { label: string; value: string })[];
+
+    // link
+    description?: string; // Context text before/around the link
 }
 
 interface Block {
@@ -70,20 +76,24 @@ const HeadingBlock = React.memo(({ data }: { data: BlockData }) => {
 });
 
 const ParagraphBlock = React.memo(({ data }: { data: BlockData }) => (
-    <p className="text-[1.05rem] md:text-lg leading-relaxed text-gray-800 mb-6">
-        {data.text}
-    </p>
+    <p
+        className="text-[1.05rem] md:text-lg leading-relaxed text-gray-800 mb-6"
+        dangerouslySetInnerHTML={{ __html: data.text || "" }}
+    />
 ));
 
 const ImageBlock = React.memo(({ data }: { data: BlockData }) => {
-    if (!data.file?.url) return null;
+    const imageUrl = data.file?.url || data.src;
+    const imageAlt = data.alt || data.caption || "News image";
+
+    if (!imageUrl) return null;
 
     return (
         <figure className="my-8">
             <div className="relative aspect-video overflow-hidden rounded-xl bg-gray-100">
                 <Image
-                    src={data.file.url}
-                    alt={data.caption || "News image"}
+                    src={imageUrl}
+                    alt={imageAlt}
                     fill
                     priority={false}
                     sizes="(max-width:768px) 100vw, 75vw"
@@ -101,9 +111,10 @@ const ImageBlock = React.memo(({ data }: { data: BlockData }) => {
 
 const QuoteBlock = React.memo(({ data }: { data: BlockData }) => (
     <blockquote className="my-8 p-6 bg-gray-50 border-l-4 border-red-600 rounded">
-        <p className="text-xl italic text-gray-900 leading-relaxed">
-            “{data.text}”
-        </p>
+        <p
+            className="text-xl italic text-gray-900 leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: `“${data.text}”` }}
+        />
         {data.caption && (
             <footer className="mt-3 text-sm font-medium text-red-600">
                 — {data.caption}
@@ -274,6 +285,34 @@ const ShayariBlock = ({ data }: { data: BlockData }) => {
 };
 
 
+const LinkBlock = ({ data }: { data: BlockData }) => {
+    if (!data.url || !data.text) return null;
+
+    return (
+        <div className="my-6 p-5 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-start gap-3">
+                <span className="text-2xl pt-1">🔗</span>
+                <div className="flex flex-col gap-1">
+                    {data.description && (
+                        <p className="text-gray-700 font-medium leading-snug">
+                            {data.description}
+                        </p>
+                    )}
+                    <a
+                        href={data.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-700 font-bold hover:underline hover:text-blue-800 break-words"
+                    >
+                        {data.text}
+                    </a>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+
 /* ============================
    MAIN RENDERER
 ============================ */
@@ -311,6 +350,8 @@ export default function BlockRenderer({
                         return <FactBoxBlock key={block.blockId} data={block.data} />;
                     case "shayari":
                         return <ShayariBlock key={block.blockId} data={block.data} />;
+                    case "link":
+                        return <LinkBlock key={block.blockId} data={block.data} />;
                     default:
                         return null;
                 }
