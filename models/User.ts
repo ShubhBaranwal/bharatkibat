@@ -147,3 +147,4 @@ UserSchema.methods.comparePassword = async function (userPassword: string) {
 const User = (models.User as Model<IUser>) || model<IUser>("User", UserSchema);
 
 export default User;
+// Password: admin123
