@@ -16,8 +16,10 @@ export async function sendPushNotification(
 
         // 1. Fetch all 'app' subscribers
         const subscribers = await PushSubscriber.find({ platform: "app" });
+        console.log(`Found ${subscribers.length} 'app' subscribers.`);
+
         if (!subscribers.length) {
-            console.log("No push subscribers found.");
+            console.log("No push subscribers found. Ensure the app has registered a token.");
             return;
         }
 
@@ -53,6 +55,7 @@ export async function sendPushNotification(
         for (const chunk of chunks) {
             try {
                 const ticketChunk = await expo.sendPushNotificationsAsync(chunk);
+                console.log("Chunk sent. Tickets:", ticketChunk);
                 tickets.push(...ticketChunk);
             } catch (error) {
                 console.error("Error sending push notification chunk:", error);
