@@ -4,7 +4,7 @@ import PushSubscriber from "@/models/PushSubscriber";
 import connectToDatabase from "@/lib/db";
 
 // Initialize Expo SDK
-const expo = new Expo();
+const expo = new Expo({ accessToken: process.env.EXPO_ACCESS_TOKEN });
 
 export async function sendPushNotification(
     title: string,

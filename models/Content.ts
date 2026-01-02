@@ -109,49 +109,17 @@ const ContentSchema = new Schema(
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ContentSchema.post("save", async function (doc: any) {
-    if (doc.type === "news" || doc.type === "5-min-news") {
-        // Prepare payload
-        const payload = { newsId: doc._id.toString() };
-        // Trigger push
-        sendPushNotification(
-            "Breaking News", // Title
-            doc.title,       // Body
-            payload
-        ).catch(err => console.error("Auto-push failed on save:", err));
+  try {
+    // ✅ ONLY NEW + PUBLISHED
+    if (doc.isNew === true && doc.published === true) {
+      await sendPushNotification(
+        "Breaking News",
+        doc.title,
+        { newsId: doc._id.toString() }
+      );
     }
+  } catch (error) {
+    console.error("Push notification failed:", error);
+  }
 });
-
-// For findOneAndUpdate (upserts or updates)
-// For findOneAndUpdate (upserts or updates)
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-ContentSchema.post("findOneAndUpdate", async function (doc: any) {
-    if (!doc) return;
-
-    // Logic: Only send if it's a news item and published
-    // NOTE: This might trigger on EVERY update. 
-    // To limit to specific conditions (like "just published"), we'd need more logic or 'pre' hooks to check changes.
-    // For now, based on requirements "whenever a new news record is inserted", relying on 'upsert' or 'save' is key.
-    // However, findOneAndUpdate post hook doesn't easily tell us if it was an insert or update without `rawResult`.
-    // A safer approach for "only new" via API/Admin usually results in a 'save' or 'create' call.
-    // But seed scripts use findOneAndUpdate with upsert.
-
-    // We will check createdAt vs updatedAt closeness to guess if it's new, OR just let it fire (might be spammy on edits).
-    // BETTER STRATEGY: Check if createdAt is very recent (within last 2 seconds)
-
-    const isRecentlyCreated =
-        doc.createdAt &&
-        doc.updatedAt &&
-        Math.abs(doc.createdAt.getTime() - doc.updatedAt.getTime()) < 2000;
-
-    // For seeded content (upsert: true), createdAt == updatedAt usually on first insert.
-    if ((doc.type === "news" || doc.type === "5-min-news") && isRecentlyCreated) {
-        const payload = { newsId: doc._id.toString() };
-        sendPushNotification(
-            "Breaking News",
-            doc.title,
-            payload
-        ).catch(err => console.error("Auto-push failed on upsert:", err));
-    }
-});
-
 export default models.Content || model("Content", ContentSchema);
