@@ -109,17 +109,19 @@ const ContentSchema = new Schema(
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ContentSchema.post("save", async function (doc: any) {
-  try {
-    // ✅ ONLY NEW + PUBLISHED
-    if (doc.isNew === true && doc.published === true) {
-      await sendPushNotification(
-        "Breaking News",
-        doc.title,
-        { newsId: doc._id.toString() }
-      );
+    try {
+        // ✅ ONLY NEW + PUBLISHED
+        if (doc.published === true) {
+            await sendPushNotification(
+                "Breaking News",
+                doc.title,
+                { newsId: doc._id.toString() }
+            );
+            console.log("chala ye");
+
+        }
+    } catch (error) {
+        console.error("Push notification failed:", error);
     }
-  } catch (error) {
-    console.error("Push notification failed:", error);
-  }
 });
 export default models.Content || model("Content", ContentSchema);

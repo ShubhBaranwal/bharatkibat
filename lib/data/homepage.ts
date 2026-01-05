@@ -19,7 +19,7 @@ export async function getHomepageData(): Promise<HomepageCategoryData[]> {
     // ⭐ Fetch only active categories, ordered by priority
     const categories = await Category.find({ isActive: true })
         .sort({ priority: 1 })
-        .limit(5)
+        .limit(6)
         .lean();
 
     const homepageData = await Promise.all(
