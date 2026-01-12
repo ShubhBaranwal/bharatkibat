@@ -1,0 +1,38 @@
+[
+  {
+    "id": "693d70032cb194a7ff401274",
+    "name": "Politics",
+    "slug": "politics",
+    "uiLabel": "राजनीति"
+  },
+  {
+    "id": "693d700d2cb194a7ff40127a",
+    "name": "Biography",
+    "slug": "biography",
+    "uiLabel": "बायोग्राफी"
+  },
+  {
+    "id": "694582c3c7cda2251c0e914e",
+    "name": "5 Minute News",
+    "slug": "5-minute-news",
+    "uiLabel": "5 मिनट न्यूज़"
+  },
+  {
+    "id": "694c1ca6b592279e244485a5",
+    "name": "Festival",
+    "slug": "festival",
+    "uiLabel": "Festival"
+  },
+  {
+    "id": "694cd6c34823d5881304a43c",
+    "name": "Awadh Ki Baat",
+    "slug": "awadh-ki-baat",
+    "uiLabel": "अवध की बात"
+  },
+  {
+    "id": "695c0e61b5ed3b675ec98b99",
+    "name": "Astrology",
+    "slug": "astrology",
+    "uiLabel": "राशिफल"
+  }
+]
